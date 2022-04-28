@@ -4,11 +4,12 @@ import com.alanpatrik.bancosantander.transactions.exceptions.CustomBadRequestExc
 import com.alanpatrik.bancosantander.transactions.exceptions.CustomInternalServerException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/transacao")
@@ -18,16 +19,13 @@ public class TransactionController {
     private TransactionServiceImpl transactionService;
 
     @GetMapping
-    public ResponseEntity<Page<Transaction>> getAll(
-            @RequestParam int page,
-            @RequestParam(required = false, defaultValue = "3") int size,
-            @RequestParam(required = false, defaultValue = "Asc") String sort) {
-        Page<Transaction> transaction = transactionService.getAll(page, size, sort);
+    public ResponseEntity<List<Transaction>> getAll() {
+        List<Transaction> transactionList = transactionService.getAll();
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(transaction);
+                .body(transactionList);
     }
 
     @PostMapping

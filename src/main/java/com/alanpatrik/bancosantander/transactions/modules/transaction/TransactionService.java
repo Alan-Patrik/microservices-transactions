@@ -5,9 +5,11 @@ import com.alanpatrik.bancosantander.transactions.exceptions.CustomInternalServe
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface TransactionService {
 
-    Page<Transaction> getAll(int page, int size, String sort);
+    List<Transaction> getAll();
 
     Transaction create(Transaction transaction) throws CustomInternalServerException, JsonProcessingException, CustomBadRequestException;
 }

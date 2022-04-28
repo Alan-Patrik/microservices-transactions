@@ -6,8 +6,9 @@ import com.alanpatrik.bancosantander.transactions.modules.clients.GetInfoAccount
 import com.alanpatrik.bancosantander.transactions.modules.clients.dto.AccountDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,8 +20,9 @@ public class TransactionServiceImpl implements TransactionService {
     private final String URL_GET_ACCOUNT_BY_NUMBER = "http://localhost:8080/contas/pesquisar?numero=";
 
     @Override
-    public Page<Transaction> getAll(int page, int size, String sort) {
-        return null;
+    public List<Transaction> getAll() {
+        List<Transaction> transactionList = transactionRepository.findAll();
+        return transactionList;
     }
 
     @Override
