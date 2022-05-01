@@ -1,8 +1,10 @@
 package com.alanpatrik.bancosantander.transactions.exceptions;
 
 import com.alanpatrik.bancosantander.transactions.http.HttpExceptionDTO;
+import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.listener.ListenerExecutionFailedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

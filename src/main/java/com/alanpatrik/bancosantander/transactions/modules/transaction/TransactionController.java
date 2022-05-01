@@ -2,6 +2,9 @@ package com.alanpatrik.bancosantander.transactions.modules.transaction;
 
 import com.alanpatrik.bancosantander.transactions.exceptions.CustomBadRequestException;
 import com.alanpatrik.bancosantander.transactions.exceptions.CustomInternalServerException;
+import com.alanpatrik.bancosantander.transactions.modules.transaction.dto.TransactionDTO;
+import com.alanpatrik.bancosantander.transactions.modules.transaction.dto.TransactionResponseDTO;
+import com.alanpatrik.bancosantander.transactions.modules.transaction.services.TransactionServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,24 +22,24 @@ public class TransactionController {
     private TransactionServiceImpl transactionService;
 
     @GetMapping
-    public ResponseEntity<List<Transaction>> getAll() {
-        List<Transaction> transactionList = transactionService.getAll();
+    public ResponseEntity<List<TransactionResponseDTO>> getAll() {
+        List<TransactionResponseDTO> transactionResponseDTOList = transactionService.getAll();
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(transactionList);
+                .body(transactionResponseDTOList);
     }
 
     @PostMapping
     public ResponseEntity<Transaction> create(
-            @RequestBody Transaction transaction
+            @RequestBody TransactionDTO transactionDTO
     ) throws CustomInternalServerException, JsonProcessingException, CustomBadRequestException {
-        Transaction receivedTransactionResponseDTO = transactionService.create(transaction);
+        Transaction receivedTransactionDTO = transactionService.create(transactionDTO);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(receivedTransactionResponseDTO);
+                .body(receivedTransactionDTO);
     }
 }
