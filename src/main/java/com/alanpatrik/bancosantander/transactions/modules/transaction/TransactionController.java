@@ -1,7 +1,6 @@
 package com.alanpatrik.bancosantander.transactions.modules.transaction;
 
 import com.alanpatrik.bancosantander.transactions.exceptions.CustomBadRequestException;
-import com.alanpatrik.bancosantander.transactions.exceptions.CustomInternalServerException;
 import com.alanpatrik.bancosantander.transactions.modules.transaction.dto.TransactionDTO;
 import com.alanpatrik.bancosantander.transactions.modules.transaction.dto.TransactionResponseDTO;
 import com.alanpatrik.bancosantander.transactions.modules.transaction.services.TransactionServiceImpl;
@@ -34,7 +33,7 @@ public class TransactionController {
     @PostMapping
     public ResponseEntity<Transaction> create(
             @RequestBody TransactionDTO transactionDTO
-    ) throws CustomInternalServerException, JsonProcessingException, CustomBadRequestException {
+    ) throws JsonProcessingException, CustomBadRequestException {
         Transaction receivedTransactionDTO = transactionService.create(transactionDTO);
 
         return ResponseEntity

@@ -39,7 +39,6 @@ public class TransactionServiceImpl implements TransactionService {
                 transactionResponseDTO.setId(transaction.getId());
                 transactionResponseDTO.setValue(transaction.getValue());
                 transactionResponseDTO.setTransactionType(transaction.getTransactionType());
-                transactionResponseDTO.setDescriptionDate(transaction.getDescriptionDate());
                 transactionResponseDTO.setSenderAccount(
                         mapper
                                 .registerModule(new JavaTimeModule())

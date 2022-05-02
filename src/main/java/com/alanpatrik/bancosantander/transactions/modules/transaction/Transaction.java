@@ -36,12 +36,12 @@ public class Transaction {
     private LocalDateTime descriptionDate;
 
     @NotNull(message = "Campo CONTA DO REMETENTE é obrigatório!")
-    @Column(name = "conta_remetente_id", columnDefinition = "MEDIUMTEXT")
+    @Column(name = "conta_remetente", columnDefinition = "MEDIUMTEXT")
     @Type(type = "org.hibernate.type.TextType")
     private String senderAccount;
 
     @NotNull(message = "Campo CONTA DO DESTINATÁRIO é obrigatório!")
-    @Column(name = "conta_destinatario_id", columnDefinition = "MEDIUMTEXT")
+    @Column(name = "conta_destinatario", columnDefinition = "MEDIUMTEXT")
     @Type(type = "org.hibernate.type.TextType")
     private String destinationAccount;
 }

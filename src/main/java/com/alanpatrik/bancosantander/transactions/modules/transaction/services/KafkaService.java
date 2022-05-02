@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.listener.ListenerExecutionFailedException;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -33,11 +32,19 @@ public class KafkaService {
     }
 
     public void save(Transaction transaction) throws JsonProcessingException {
-        Transaction transactionResponse = transactionRepository.save(transaction);
+        transactionRepository.save(transaction);
+
         create("SalvarTransacao", transaction);
+        sendTransactionReceipt("EnviarComprovante", transaction);
     }
 
     public void create(String topic, Transaction transaction) throws JsonProcessingException {
         kafkaTemplate.send(topic, transactionMapper.toDTO(transaction));
+    }
+
+    public void sendTransactionReceipt(String topic, Transaction transactionReceived) throws JsonProcessingException {
+        var transaction = transactionMapper.toDTO(transactionReceived);
+        log.info("TRANSAÇÃO => {}", transaction);
+        kafkaTemplate.send(topic, transaction);
     }
 }
